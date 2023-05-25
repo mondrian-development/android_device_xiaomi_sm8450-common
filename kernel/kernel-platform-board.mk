@@ -36,7 +36,7 @@ endef
 prepend-kernel-modules = $(eval $1 := $2 $(filter-out $2,$($1)))
 
 first_stage_modules := $(call get-kernel-modules,.)
-second_stage_modules := $(call get-kernel-modules,vendor_dlkm)
+second_stage_modules := $(call get-kernel-modules,modules)
 
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES += $(first_stage_modules)
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES += $(second_stage_modules)
@@ -46,9 +46,9 @@ $(call prepend-kernel-modules,BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD,
 
 $(call prepend-kernel-modules,BOARD_VENDOR_KERNEL_MODULES,$(second_stage_modules))
 
-BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(wildcard $(KERNEL_PREBUILT_DIR)/vendor_dlkm/modules.blocklist)
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(wildcard $(KERNEL_PREBUILT_DIR)/modules/modules.blocklist)
 # vendor ramdisk has second-stage modules for recovery
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(wildcard $(KERNEL_PREBUILT_DIR)/vendor_dlkm/modules.blocklist)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(wildcard $(KERNEL_PREBUILT_DIR)/modules/modules.blocklist)
 
 endif # ($(wildcard $(KERNEL_PREBUILT_DIR)/),)
 

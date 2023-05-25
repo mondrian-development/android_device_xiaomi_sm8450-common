@@ -95,20 +95,20 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
 # Kernel
 # is-board-platform-in-list is used in split files below
 # from https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/core-utils/-/blob/LA.QSSI.12.0.r1-08700.03-qssi.0/build/utils.mk
-include $(COMMON_PATH)/build/utils.mk
+# include $(COMMON_PATH)/build/utils.mk
 
-include $(COMMON_PATH)/kernel/kernel-platform-board.mk
-include vendor/qcom/opensource/audio-kernel/audio_kernel_vendor_board.mk
-include vendor/qcom/opensource/camera-kernel/board.mk
-include vendor/qcom/opensource/dataipa/dataipa_dlkm_vendor_board.mk
-include vendor/qcom/opensource/datarmnet-ext/datarmnet_ext_dlkm_vendor_board.mk
-include vendor/qcom/opensource/datarmnet/datarmnet_dlkm_vendor_board.mk
-include vendor/qcom/opensource/display-drivers/display_driver_board.mk
-include vendor/qcom/opensource/eva-kernel/eva_kernel_board.mk
-include vendor/qcom/opensource/mmrm-driver/mmrm_kernel_board.mk
-include vendor/qcom/opensource/video-driver/video_kernel_board.mk
+# include $(COMMON_PATH)/kernel/kernel-platform-board.mk
+# include vendor/qcom/opensource/audio-kernel/audio_kernel_vendor_board.mk
+# include vendor/qcom/opensource/camera-kernel/board.mk
+# include vendor/qcom/opensource/dataipa/dataipa_dlkm_vendor_board.mk
+# include vendor/qcom/opensource/datarmnet-ext/datarmnet_ext_dlkm_vendor_board.mk
+# include vendor/qcom/opensource/datarmnet/datarmnet_dlkm_vendor_board.mk
+# include vendor/qcom/opensource/display-drivers/display_driver_board.mk
+# include vendor/qcom/opensource/eva-kernel/eva_kernel_board.mk
+# include vendor/qcom/opensource/mmrm-driver/mmrm_kernel_board.mk
+# include vendor/qcom/opensource/video-driver/video_kernel_board.mk
 
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+# BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 
@@ -118,8 +118,8 @@ BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
 
-BOARD_VENDOR_RAMDISK_FRAGMENTS := dlkm
-BOARD_VENDOR_RAMDISK_FRAGMENT.dlkm.KERNEL_MODULE_DIRS := top
+# BOARD_VENDOR_RAMDISK_FRAGMENTS := dlkm
+# BOARD_VENDOR_RAMDISK_FRAGMENT.dlkm.KERNEL_MODULE_DIRS := top
 
 BOARD_KERNEL_CMDLINE := \
     video=vfb:640x400,bpp=32,memsize=3072000 \
@@ -129,7 +129,8 @@ BOARD_KERNEL_CMDLINE := \
 BOARD_BOOTCONFIG := \
     androidboot.hardware=qcom \
     androidboot.memcg=1 \
-    androidboot.usbcontroller=a600000.dwc3
+    androidboot.usbcontroller=a600000.dwc3 \
+    androidboot.selinux=permissive
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
