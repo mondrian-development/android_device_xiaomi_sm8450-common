@@ -92,6 +92,9 @@ function set_density_by_fb() {
             "ziyi")
             setprop vendor.display.lcd_density 440
             ;;
+            "mondrian")
+            setprop vendor.display.lcd_density 560
+            ;;
             *)
             setprop vendor.display.lcd_density 480
             ;;

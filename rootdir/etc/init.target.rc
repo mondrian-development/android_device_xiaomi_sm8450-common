@@ -173,6 +173,7 @@ on post-fs-data
     mkdir /data/vendor/qxwz 0770 gps system
     #QCC mode configuration
     setprop vendor.qti.qdma.oper.mode 3
+	setprop vendor.qti.qcc.oper.mode 3
 
     # Display feature sysfs node
     chown system system /sys/class/mi_display/disp-DSI-0/disp_param

@@ -126,6 +126,7 @@ on boot
     # modem
     chmod 0777 /dev/smd8
     chown radio radio /dev/smd8
+    mkdir /data/vendor/modem 0777 radio radio
 
     # This location is used by QCRIL to host UNIX domain
     # socket files used for internal IPC within QCRIL
@@ -250,6 +251,12 @@ on post-fs-data
     mkdir /data/vendor/camera 0777 camera camera
     mkdir /data/vendor/camera/offlinelog 0777 cameraserver audio
     chmod 0666 /dev/camlog
+
+
+    #logturbo
+    chmod 0666 /dev/mi_exception_log
+    chown system system /proc/mi_log/binder_delay
+    chown system system /proc/mi_log/delay
 
 
     #Create directory for tftp
@@ -542,6 +549,20 @@ service qmiproxy /system/bin/qmiproxy
     group radio diag
     disabled
 
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
+    -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1 \
+    -g@android:vendor_wpa_wlan0
+#   we will start as root and wpa_supplicant will switch to user wifi
+#   after setting up the capabilities required for WEXT
+#   user wifi
+#   group wifi inet keystore
+    interface android.hardware.wifi.supplicant@1.0::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.1::ISupplicant default
+    class main
+    socket vendor_wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
 service vendor.wigig_supplicant /vendor/bin/hw/wpa_supplicant \
     -iwigig0 -Dnl80211 -c/data/vendor/wifi/wigig_supplicant.conf \
     -m/data/vendor/wifi/wigig_p2p_supplicant.conf \
@@ -797,7 +818,7 @@ service diag_mdlog_stop /vendor/bin/diag_mdlog -k
     disabled
     oneshot
 
-service diag_mdlog_auto_start /vendor/bin/diag_mdlog -c -n 50
+service diag_mdlog_auto_start /vendor/bin/diag_mdlog -q 0x2006 -j 1 -u -c -i -n 50
     class late_start
     user system
     group system oem_2902 oem_2905 sdcard_rw sdcard_r media_rw
@@ -810,26 +831,26 @@ service diag_mdlog_auto_stop /vendor/bin/diag_mdlog -k
     group system oem_2902 oem_2905 sdcard_rw sdcard_r media_rw
     disabled
     oneshot
-    
+
 on property:persist.vendor.radio.diag_log_trriger=modem
     setprop debug.offline_log.enable true
     setprop debug.offline_log.module ${persist.vendor.radio.diag_log_trriger}
-    start diag_mdlog_start
+    start diag_mdlog_auto_start
 
 on property:persist.vendor.radio.diag_log_trriger=audio
     setprop debug.offline_log.enable true
     setprop debug.offline_log.module ${persist.vendor.radio.diag_log_trriger}
-    start diag_mdlog_start
+    start diag_mdlog_auto_start
 
 on property:persist.vendor.radio.diag_log_trriger=gps
     setprop debug.offline_log.enable true
     setprop debug.offline_log.module ${persist.vendor.radio.diag_log_trriger}
-    start diag_mdlog_start
+    start diag_mdlog_auto_start
 
 on property:persist.vendor.radio.diag_log_trriger=sensor
     setprop debug.offline_log.enable true
     setprop debug.offline_log.module ${persist.vendor.radio.diag_log_trriger}
-    start diag_mdlog_start
+    start diag_mdlog_auto_start
 
 service qlogd /system/xbin/qlogd
     socket qlogd stream 0662 system system
@@ -981,4 +1002,3 @@ service qrtr-lookup /vendor/bin/qrtr-lookup
     group system
     disabled
     oneshot
-
