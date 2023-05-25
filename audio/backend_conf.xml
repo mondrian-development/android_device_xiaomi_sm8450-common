@@ -26,8 +26,9 @@
 <!-- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN    -->
 <!-- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                             -->
 <config>
-    <group_device name="TDM-LPAIF-RX-TERTIARY" rate="96000" ch="3" bits="24" slot_mask="7"/>
-    <device name="TDM-LPAIF-RX-TERTIARY-VIRT-0" rate="96000" ch="3" bits="24" />
+    <group_device name="TDM-LPAIF-RX-TERTIARY" rate="48000" ch="3" bits="32" slot_mask="7"/>
+    <device name="TDM-LPAIF-RX-TERTIARY-VIRT-0" rate="48000" ch="2" bits="32" />
+    <device name="TDM-LPAIF-TX-TERTIARY" rate="48000" ch="2" bits="32" />
     <device name="CODEC_DMA-LPAIF_WSA-RX-0" rate="48000" ch="1" bits="16" />
     <device name="CODEC_DMA-LPAIF_WSA-RX-1" rate="48000" ch="1" bits="16" />
     <device name="TDM-LPAIF_AXI-RX-PRIMARY" rate="48000" ch="2" bits="16" />
@@ -60,7 +61,6 @@
     <device name="TDM-LPAIF-TX-PRIMARY" rate="48000" ch="1" bits="16" />
     <device name="TDM-LPAIF_AUD-RX-PRIMARY" rate="48000" ch="1" bits="16" />
     <device name="TDM-LPAIF_AUD-TX-PRIMARY" rate="48000" ch="1" bits="16" />
-    <device name="TDM-LPAIF-TX-TERTIARY" rate="96000" ch="4" bits="24" />
     <device name="TDM-LPAIF_RXTX-RX-PRIMARY" rate="48000" ch="1" bits="16" />
     <device name="TDM-LPAIF_RXTX-TX-PRIMARY" rate="48000" ch="1" bits="16" />
     <device name="TDM-LPAIF_VA-RX-PRIMARY" rate="48000" ch="1" bits="16" />
@@ -68,4 +68,3 @@
     <device name="TDM-LPAIF_WSA-RX-PRIMARY" rate="48000" ch="1" bits="16" />
     <device name="TDM-LPAIF_WSA-TX-PRIMARY" rate="48000" ch="1" bits="16" />
 </config>
-
